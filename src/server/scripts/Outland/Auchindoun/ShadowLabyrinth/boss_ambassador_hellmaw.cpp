@@ -107,8 +107,7 @@ struct boss_ambassador_hellmaw : public EscortAI
             me->RemoveAurasDueToSpell(SPELL_BANISH);
 
         Talk(SAY_INTRO);
-        LoadPath(PATH_ESCORT_HELLMAW);
-        Start(true, ObjectGuid::Empty, nullptr, false, true);
+        Start(true, true, ObjectGuid::Empty, nullptr, false, true);
     }
 
     void JustEngagedWith(Unit* /*who*/) override

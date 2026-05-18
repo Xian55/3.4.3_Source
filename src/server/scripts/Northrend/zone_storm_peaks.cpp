@@ -196,10 +196,7 @@ struct npc_icefang : public EscortAI
         if (who->GetTypeId() == TYPEID_PLAYER)
         {
             if (apply)
-            {
-                LoadPath(PATH_ESCORT_ICEFANG);
-                Start(false, who->GetGUID());
-            }
+                Start(false, true, who->GetGUID());
         }
     }
 

@@ -106,8 +106,7 @@ struct npc_engineer_helice : public EscortAI
         {
             me->SetFaction(FACTION_ESCORTEE_N_NEUTRAL_PASSIVE);
 
-            LoadPath(PATH_ESCORT_HELICE);
-            Start(false, player->GetGUID());
+            Start(false, false, player->GetGUID());
             Talk(SAY_WP_1);
         }
     }
@@ -293,7 +292,7 @@ struct npc_jungle_punch_target : public ScriptedAI
                     timer = 5000;
                     break;
                 case 6:
-                    orphan->GetMotionMaster()->MoveFollow(player, PET_FOLLOW_DIST, PET_FOLLOW_ANGLE);
+                    orphan->GetMotionMaster()->MoveFollow(player, DEFAULT_FOLLOW_DISTANCE_PET, DEFAULT_FOLLOW_ANGLE);
                     player->GroupEventHappens(QUEST_THE_MIGHTY_HEMET_NESINGWARY, me);
                     Reset();
                     return;

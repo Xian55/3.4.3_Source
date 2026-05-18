@@ -390,7 +390,6 @@ struct npc_brann_hos : public EscortAI
         me->RemoveNpcFlag(UNIT_NPC_FLAG_GOSSIP);
         SetEscortPaused(false);
         uiStep = 1;
-        LoadPath(PATH_ESCORT_BRANN);
         Start();
     }
 

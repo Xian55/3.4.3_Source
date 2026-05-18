@@ -140,7 +140,7 @@ struct boss_high_astromancer_solarian : public BossAI
     {
         Initialize();
         _Reset();
-        me->SetArmor(defaultarmor, 0);
+        me->SetArmor(defaultarmor);
         me->SetUninteractible(false);
         me->SetVisible(true);
         me->SetDisplayId(MODEL_HUMAN);
@@ -392,7 +392,7 @@ struct boss_high_astromancer_solarian : public BossAI
             me->SetVisible(true);
             Talk(SAY_VOIDA);
             Talk(SAY_VOIDB);
-            me->SetArmor(WV_ARMOR, 0);
+            me->SetArmor(WV_ARMOR);
             me->SetDisplayId(MODEL_VOIDWALKER);
         }
     }

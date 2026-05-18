@@ -205,8 +205,7 @@ public:
             {
                 me->SetStandState(UNIT_STAND_STATE_STAND);
                 me->SetFaction(FACTION_ESCORTEE_H_NEUTRAL_ACTIVE);
-                LoadPath(PATH_ESCORT_MAGHAR_CAPTIVE);
-                Start(true, player->GetGUID(), quest);
+                Start(true, true, player->GetGUID(), quest);
                 Talk(SAY_MAG_START);
 
                 me->SummonCreature(NPC_MURK_RAIDER, m_afAmbushA[0] + 2.5f, m_afAmbushA[1] - 2.5f, m_afAmbushA[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25s);
@@ -398,8 +397,7 @@ public:
             {
                 me->SetStandState(UNIT_STAND_STATE_STAND);
                 me->SetFaction(FACTION_ESCORTEE_A_NEUTRAL_ACTIVE);
-                LoadPath(PATH_ESCORT_KURENAI_CAPTIVE);
-                Start(true, player->GetGUID(), quest);
+                Start(true, true, player->GetGUID(), quest);
                 Talk(SAY_KUR_START);
 
                 me->SummonCreature(NPC_KUR_MURK_RAIDER, kurenaiAmbushA[0] + 2.5f, kurenaiAmbushA[1] - 2.5f, kurenaiAmbushA[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25s);

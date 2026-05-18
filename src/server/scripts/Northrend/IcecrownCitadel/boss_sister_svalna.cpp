@@ -747,7 +747,6 @@ struct npc_crok_scourgebane : public EscortAI
                     Talk(SAY_CROK_INTRO_3);
                     break;
                 case EVENT_START_PATHING:
-                    LoadPath(PATH_ESCORT_CROK_SCOURGEBANE),
                     Start(true);
                     break;
                 case EVENT_SCOURGE_STRIKE:
@@ -802,8 +801,8 @@ struct npc_argent_captainAI : public ScriptedAI
 public:
     npc_argent_captainAI(Creature* creature) : ScriptedAI(creature), instance(creature->GetInstanceScript()), _firstDeath(true)
     {
-        FollowAngle = PET_FOLLOW_ANGLE;
-        FollowDist = PET_FOLLOW_DIST;
+        FollowAngle = DEFAULT_FOLLOW_ANGLE;
+        FollowDist = DEFAULT_FOLLOW_DISTANCE;
         IsUndead = false;
     }
 
