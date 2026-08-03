@@ -87,7 +87,7 @@ public:
         ProcessUnclaimedBpayItems(session);
 
         // Process Alpha Testing items
-        ProcessAlphaItems(player);
+        //ProcessAlphaItems(player);
     }
 };
 
