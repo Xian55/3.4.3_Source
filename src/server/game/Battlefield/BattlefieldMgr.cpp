@@ -34,6 +34,7 @@ std::array<uint32, BATTLEFIELD_MAX> BattlefieldIdToScriptId = { 0, 0 };
 BattlefieldMgr::BattlefieldMgr()
 {
     _updateTimer = 0;
+    _initialized = false;
 }
 
 BattlefieldMgr::~BattlefieldMgr() = default;
@@ -70,11 +71,22 @@ void BattlefieldMgr::InitBattlefield()
         } while (result->NextRow());
     }
 
+    _initialized = true;
+
     TC_LOG_INFO("server.loading", ">> Loaded {} battlefields in {} ms", count, GetMSTimeDiffToNow(oldMSTime));
 }
 
 void BattlefieldMgr::CreateBattlefieldsForMap(Map* map)
 {
+    // Maps created before InitBattlefield() silently get no battlefield, and they are never
+    // rebuilt afterwards - make that ordering mistake visible instead of hunting it down later.
+    if (!_initialized)
+    {
+        TC_LOG_ERROR("bg.battlefield", "BattlefieldMgr::CreateBattlefieldsForMap called for map {} before InitBattlefield(); "
+            "no battlefield will ever be created on this map.", map->GetId());
+        return;
+    }
+
     for (uint32 i = 0; i < BATTLEFIELD_MAX; ++i)
     {
         if (!BattlefieldIdToScriptId[i])
@@ -91,6 +103,7 @@ void BattlefieldMgr::CreateBattlefieldsForMap(Map* map)
         {
             TC_LOG_INFO("bg.battlefield", "Setting up battlefield with TypeId {} on map {} instance id {} failed.", i, map->GetId(), map->GetInstanceId());
             delete bf;
+            continue;
         }
 
         _battlefieldsByMap[map].emplace_back(bf);

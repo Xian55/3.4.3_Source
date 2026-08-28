@@ -75,6 +75,8 @@ class TC_GAME_API BattlefieldMgr
         BattlefieldMapByZone _battlefieldsByZone;
         // update interval
         uint32 _updateTimer;
+        // set by InitBattlefield(); guards against maps being created before the script table is loaded
+        bool _initialized;
 };
 
 #define sBattlefieldMgr BattlefieldMgr::instance()

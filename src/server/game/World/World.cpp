@@ -2421,6 +2421,17 @@ void World::SetInitialWorldSettings()
     TC_LOG_INFO("server.loading", "Starting Map System");
     sMapMgr->Initialize();
 
+    ///- Initialize Battlefield
+    // Must run BEFORE PreloadContinents(). Map's constructor calls
+    // BattlefieldMgr::CreateBattlefieldsForMap, which skips every entry while
+    // BattlefieldIdToScriptId is still zero-filled -- and that table is only populated by
+    // InitBattlefield(). Preloading Northrend first therefore created map 571 with no
+    // battlefield attached, and because the Map is cached in i_maps it is never rebuilt,
+    // so Wintergrasp could not be started for the life of the server (.bf start 1 fell
+    // through to the command's syntax help).
+    TC_LOG_INFO("server.loading", "Starting Battlefield System");
+    sBattlefieldMgr->InitBattlefield();
+
     // Alistar: Create continent maps
     // We do this because when we're starting GameEvents at load time (look below), they use the current continent maps.
     // Failing to pre-load them results in pooled objects not being spawned. Example: Noblegarden eggs.
@@ -2456,10 +2467,6 @@ void World::SetInitialWorldSettings()
     ///- Initialize outdoor pvp
     TC_LOG_INFO("server.loading", "Starting Outdoor PvP System");
     sOutdoorPvPMgr->InitOutdoorPvP();
-
-    ///- Initialize Battlefield
-    TC_LOG_INFO("server.loading", "Starting Battlefield System");
-    sBattlefieldMgr->InitBattlefield();
 
     ///- Initialize Warden
     TC_LOG_INFO("server.loading", "Loading Warden Checks...");
